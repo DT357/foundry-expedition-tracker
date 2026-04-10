@@ -330,7 +330,7 @@ class TrackerPositionResetConfig extends FormApplication {
       height: 'auto',
       closeOnSubmit: true,
       submitOnClose: false,
-      classes: ['expedition-timed-effect-template-config'],
+      classes: ['expedition-tracker-reset-config'],
     });
   }
 

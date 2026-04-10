@@ -1,40 +1,118 @@
-# System Agnostic Expedition Tracker
-This is a simple expedition tracker for Foundry VTT.  It allows a GM to create a new expedition, log the individual expedition turns to a Journal, and increment turns as the players perform actions.  The module includes two default expedition types - dungeons, which increment turns and have 6 turns in an hour, and Overland/Hexcrawl mode, which increments 6 watches per day of four hours each.
+# Expedition Tracker
 
-The GM can also create custom expedition increment types, as needed for various games.
+`Expedition Tracker` is a system-agnostic Foundry VTT module for GM-facing expedition timekeeping, wandering checks, timed effects, and expedition logging.
 
-The module can also optionally roll for wandering monsters automatically at a pre-determined interval.
+It is designed to stay compact and fast at the table while still supporting richer exploration options like timed light sources, journal logging, and effect countdowns.
 
-There is also a timed effect tracker, that can be used to track pre-created effects in the module settings window, or custom effects at the time of effect creation.  Timed effects can be flagged as light sources and apply the basic light settings directly to a token on the active scene.  When the effect ends, the lighting effect will be removed from the character.
+## Current Status
 
-A simple module, my first, so if there's anything broken or ideas for enhancements, feel free to yell at me on git.  Hope someone other than me finds it useful :)
+- Module id: `expedition-tracker`
+- Current version: `2026.04.10`
+- Foundry compatibility:
+  - minimum: `13`
+  - verified: `14.359`
 
-### The default location of the tracker
-<img width="1045" height="168" alt="image" src="https://github.com/user-attachments/assets/040dbbcd-5e51-4ad9-921f-a24462a788ea" />
+## Core Features
 
-### Creating a new expedition
-<img width="882" height="946" alt="image" src="https://github.com/user-attachments/assets/b99c5a4b-73c7-484e-a1d6-e530ed0beeed" />
+### Expedition Tracking HUD
 
-### A New Expedition
-<img width="984" height="344" alt="image" src="https://github.com/user-attachments/assets/21bb8e54-1628-4815-af72-bb5f90d6b01d" />
+- Compact GM-only expedition tracker HUD
+- Draggable header
+- Per-client saved HUD position
+- Module-options `Reset Position` action
+- Start/end expedition workflow
+- Supports dungeon, overland, and custom time procedures
 
-### Optional Journal Logging
-<img width="1222" height="1009" alt="image" src="https://github.com/user-attachments/assets/96fb9384-65bb-472f-818f-db1f250f629e" />
+### Turn and Wandering Procedure Tracking
 
-### Timed Effect Tracker
-<img width="1010" height="580" alt="image" src="https://github.com/user-attachments/assets/322104c7-13d0-453a-b979-553009cd3a41" />
+- Advance expedition turns directly from the HUD
+- Built-in turn actions:
+  - advance
+  - rest
+  - search
+  - listen
+  - custom other turn
+- Wandering check support with:
+  - configurable encounter chance
+  - configurable cadence
+  - optional auto-checking
 
-### Light Source Applied
-<img width="982" height="1051" alt="image" src="https://github.com/user-attachments/assets/15ae676f-bffa-46e7-9d57-2c1eb5ccb3e9" />
-*Looks like ol' Conan might be in for a bit of a surprise...*
+### Expedition Logging
 
-### Effect Tracking as Turns iterate
-<img width="852" height="333" alt="image" src="https://github.com/user-attachments/assets/4edf3092-bd0f-449c-9e74-6735cfc9d6a4" />
+- Tracker log stored as typed log entries
+- Current tracked entry types include:
+  - turn actions
+  - notes
+  - wandering checks
+  - timed effect activation
+  - timed effect expiration
+  - timed effect pause
+  - timed effect resume
+- Optional expedition journal logging
 
-### Effect Ending
-<img width="1956" height="547" alt="image" src="https://github.com/user-attachments/assets/d5f32771-40a3-44d7-b32f-844be873710e" />
+### Timed Effects
 
+- Enable/disable the timed effect turn track from module settings
+- Add timed effects from reusable templates
+- Add fully custom timed effects
+- Supports both:
+  - predefined effect templates
+  - one-off effects created in the dialog
+- Track remaining duration on the HUD
+- Manage active timed effects after creation
 
-## Future To-Do
- - Create a module setting for GM's to pre-create their preferred expedition types so it doesn't have to be repopulated each time
- - Probably fix things that come up in more testing as I use it
+### Timed Effect Management
+
+- Edit active timed effects
+- Pause/resume timed effects
+- Custom Foundry-styled hover tooltip
+- Template-based effect names stay read-only
+- Custom effects can be renamed
+
+### Timed Effect Announcements
+
+- Optional `Announce Effect` checkbox when adding a new effect
+- Public chat announcement when enabled
+- Current wording:
+  - non-light effects: `<Character Name> gains <Effect Name>. (Duration: <X IncrementName>)`
+  - light-source effects: `<Character Name> lights a <Effect Name>! (Duration: <X IncrementName>)`
+- Effect icons are included in begin/end chat messages when available
+
+### Light-Source Timed Effects
+
+- Timed effect templates and custom effects can be marked as `Light Source`
+- Supports:
+  - bright light radius
+  - dim light radius
+  - emission angle
+- Light-source effects bind to a real token on the current scene
+- Token light updates immediately when the effect is applied
+- Overlap policy:
+  - newest active light-source effect wins
+  - expiration/removal recalculates from remaining active light-source effects on that token
+  - if none remain, token light resets to `0 / 0 / 360`
+- Public extinguish chat message on natural expiration
+
+### Theme Awareness
+
+- The module now follows Foundry light mode vs dark mode automatically
+- The tracker HUD, expedition dialogs, and timed-effect dialogs use module-scoped theme variables instead of a hard-forced dark palette
+
+## Module Settings
+
+Current settings include:
+
+- `Enable Expedition Tracker`
+- `Enable Timed Effects Turn Track`
+- `Timed Effect Templates`
+- `Reset Tracker Position`
+
+## Current Next Priorities
+
+The current highest-priority remaining work is:
+
+1. Log filtering/toggles in the HUD
+2. Improved journal formatting for typed log entries
+3. UI refinement for crowded timed-effect slots and narrow-width layouts
+4. Optional expiring-soon timed-effect visuals
+5. Saved custom time procedure presets

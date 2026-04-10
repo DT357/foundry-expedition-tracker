@@ -690,6 +690,46 @@ function createTimedEffectActivatedEntry(effect) {
   };
 }
 
+function getTimedEffectDurationLabel(duration, timekeeping = getDefaultTimekeepingConfig()) {
+  const incrementLabel = duration === 1
+    ? timekeeping.incrementLabelSingular
+    : timekeeping.incrementLabelPlural;
+  return localizeTracker('TimedEffects.AnnounceDurationLabel', {
+    duration,
+    incrementLabel,
+  });
+}
+
+function getTimedEffectAnnouncementText(effect, timekeeping = getDefaultTimekeepingConfig()) {
+  const target = getSourceDisplayLabel(effect, getSceneTokenNameById(effect.sourceTokenId, effect.sourceSceneId));
+  const duration = getTimedEffectDurationLabel(effect.totalTurns, timekeeping);
+  if (target) {
+    return localizeTracker(isEffectLightSource(effect) ? 'TimedEffects.AnnounceLightWithTarget' : 'TimedEffects.AnnounceWithTarget', {
+      target,
+      name: effect.name,
+      duration,
+    });
+  }
+
+  return localizeTracker(isEffectLightSource(effect) ? 'TimedEffects.AnnounceLight' : 'TimedEffects.Announce', {
+    name: effect.name,
+    duration,
+  });
+}
+
+function buildTimedEffectChatContent(effect, text) {
+  const iconMarkup = effect?.iconPath
+    ? `<img src="${escapeHtml(effect.iconPath)}" alt="${escapeHtml(effect.name)}" style="width:28px;height:28px;object-fit:cover;border:1px solid rgba(0,0,0,0.18);border-radius:4px;flex:0 0 auto;">`
+    : '';
+
+  return `
+    <div style="display:flex;align-items:center;gap:0.55rem;">
+      ${iconMarkup}
+      <p style="margin:0;">${escapeHtml(text)}</p>
+    </div>
+  `;
+}
+
 function createTimedEffectPausedEntry(effect) {
   const source = getSourceDisplayLabel(effect, getSceneTokenNameById(effect.sourceTokenId, effect.sourceSceneId));
   const text = source ? localizeTracker('TimedEffects.PausedWithSource', {
@@ -821,7 +861,7 @@ async function createTimedEffectExpirationWhispers(expiredTimedEffects) {
       speaker: {
         alias: localizeTracker('Title'),
       },
-      content: `<p>${escapeHtml(logEntry.text)}</p>`,
+      content: buildTimedEffectChatContent(effect, logEntry.text),
       whisper: whisperRecipients,
       sound: CONFIG.sounds.notification,
     });
@@ -840,12 +880,21 @@ async function createTimedEffectExtinguishedMessages(expiredTimedEffects) {
       speaker: {
         alias: localizeTracker('Title'),
       },
-      content: `<p>${escapeHtml(localizeTracker('TimedEffects.ExtinguishedMessage', {
+      content: buildTimedEffectChatContent(effect, localizeTracker('TimedEffects.ExtinguishedMessage', {
         tokenName,
         name: effect.name,
-      }))}</p>`,
+      })),
     });
   }
+}
+
+async function createTimedEffectAnnouncement(effect, timekeeping = getDefaultTimekeepingConfig()) {
+  await ChatMessage.create({
+    speaker: {
+      alias: localizeTracker('Title'),
+    },
+    content: buildTimedEffectChatContent(effect, getTimedEffectAnnouncementText(effect, timekeeping)),
+  });
 }
 
 async function removeActiveExpeditionLights(timedEffects = []) {
@@ -1245,18 +1294,6 @@ function buildTimedEffectTemplateOptions(templates) {
   ].join('');
 }
 
-function buildTimedEffectSourceOptions() {
-  const names = new Set();
-  for (const token of canvas?.tokens?.placeables ?? []) {
-    const name = String(token.document?.name ?? token.actor?.name ?? '').trim();
-    if (name) names.add(name);
-  }
-
-  return [...names].sort((left, right) => left.localeCompare(right)).map((name) => `
-    <option value="${escapeHtml(name)}"></option>
-  `).join('');
-}
-
 function buildTimedEffectSourceTokenOptions(tokens, selectedTokenId = '') {
   const placeholderOption = `
     <option value="">${escapeHtml(localizeTracker('TimedEffects.AddDialog.SourceTokenPlaceholder'))}</option>
@@ -1439,13 +1476,17 @@ function parseTimedEffectConfig(form, templates) {
   const sourceSceneId = String(canvas?.scene?.id ?? '').trim();
   const sourceTokenName = getSceneTokenNameById(sourceTokenId, sourceSceneId);
   const sourceLabel = String(form?.elements?.timedEffectSourceLabel?.value ?? '').trim();
-  const freeformSource = String(form?.elements?.timedEffectSource?.value ?? '').trim();
+  const nonLightSourceTokenId = String(form?.elements?.timedEffectFreeformSourceTokenId?.value ?? '').trim();
+  const nonLightSourceTokenName = getSceneTokenNameById(nonLightSourceTokenId, sourceSceneId);
+  const customSource = String(form?.elements?.timedEffectCustomSource?.value ?? '').trim();
+  const freeformSource = customSource || nonLightSourceTokenName;
   const lightSourceConfig = normalizeLightSourceConfig({
     isLightSource: form?.elements?.timedEffectIsLightSource?.checked,
     brightLight: form?.elements?.timedEffectBrightLight?.value,
     dimLight: form?.elements?.timedEffectDimLight?.value,
     emissionAngle: form?.elements?.timedEffectEmissionAngle?.value,
   });
+  const announceEffect = Boolean(form?.elements?.timedEffectAnnounceEffect?.checked);
 
   if (lightSourceConfig.isLightSource && (!sourceTokenId || !sourceSceneId || !sourceTokenName)) {
     ui.notifications.warn(localizeTracker('TimedEffects.AddDialog.SourceTokenRequired'));
@@ -1473,6 +1514,7 @@ function parseTimedEffectConfig(form, templates) {
       sourceLabel: lightSourceConfig.isLightSource ? getSourceDisplayLabel({ sourceLabel }, sourceTokenName) : freeformSource,
       sourceTokenId: lightSourceConfig.isLightSource ? sourceTokenId : '',
       sourceSceneId: lightSourceConfig.isLightSource ? sourceSceneId : '',
+      announceEffect,
       ...lightSourceConfig,
     };
   }
@@ -1493,13 +1535,13 @@ function parseTimedEffectConfig(form, templates) {
     sourceLabel: lightSourceConfig.isLightSource ? getSourceDisplayLabel({ sourceLabel }, sourceTokenName) : freeformSource,
     sourceTokenId: lightSourceConfig.isLightSource ? sourceTokenId : '',
     sourceSceneId: lightSourceConfig.isLightSource ? sourceSceneId : '',
+    announceEffect,
     ...lightSourceConfig,
   };
 }
 
 async function promptForTimedEffect() {
   const templates = getTimedEffectTemplates();
-  const sourceOptions = buildTimedEffectSourceOptions();
   const sourceTokens = getCurrentSceneSourceTokens();
   const selectedTokenId = getSingleControlledTokenId();
 
@@ -1532,15 +1574,22 @@ async function promptForTimedEffect() {
       </div>
       <div class="form-group" data-timed-effect-freeform-source-field>
         <label>${localizeTracker('TimedEffects.AddDialog.SourceLabel')}</label>
-        <input type="text" name="timedEffectSource" list="timed-effect-source-options" placeholder="${localizeTracker('TimedEffects.AddDialog.SourcePlaceholder')}">
-        <datalist id="timed-effect-source-options">
-          ${sourceOptions}
-        </datalist>
+        <select name="timedEffectFreeformSourceTokenId">
+          ${buildTimedEffectSourceTokenOptions(sourceTokens, '')}
+        </select>
       </div>
-      <div class="form-group">
-        <label>
+      <div class="form-group" data-timed-effect-freeform-source-field>
+        <label>${localizeTracker('TimedEffects.AddDialog.CustomSourceLabel')}</label>
+        <input type="text" name="timedEffectCustomSource" placeholder="${localizeTracker('TimedEffects.AddDialog.SourcePlaceholder')}">
+      </div>
+      <div class="form-group expedition-timed-effect-toggle-row">
+        <label class="expedition-timed-effect-checkbox-option">
           <input type="checkbox" name="timedEffectIsLightSource" data-is-auto-default="true">
-          ${localizeTracker('TimedEffects.AddDialog.LightSourceLabel')}
+          <span>${localizeTracker('TimedEffects.AddDialog.LightSourceLabel')}</span>
+        </label>
+        <label class="expedition-timed-effect-checkbox-option">
+          <input type="checkbox" name="timedEffectAnnounceEffect" checked>
+          <span>${localizeTracker('TimedEffects.AddDialog.AnnounceEffectLabel')}</span>
         </label>
       </div>
       <div class="form-group" data-timed-effect-source-token-field hidden>
@@ -1812,6 +1861,10 @@ async function addTimedEffect() {
 
     return nextState;
   });
+
+  if (timedEffectConfig.announceEffect) {
+    await createTimedEffectAnnouncement(timedEffect, getTrackerState().timekeeping);
+  }
 
   if (isEffectLightSource(timedEffect)) {
     await recalculateTokenLightForToken(getTrackerState(), timedEffect.sourceTokenId, timedEffect.sourceSceneId);

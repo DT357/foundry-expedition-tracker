@@ -8,8 +8,108 @@
 .expedition-tracker-hud,
 .expedition-tracker-hud *,
 .application.dialog.expedition-tracker-ui,
-.application.dialog.expedition-tracker-ui * {
+.application.dialog.expedition-tracker-ui *,
+.application.expedition-timed-effect-template-config,
+.application.expedition-timed-effect-template-config *,
+#expedition-tracker-timed-effect-templates-config,
+#expedition-tracker-timed-effect-templates-config * {
   font-family: Signika, sans-serif !important;
+}
+
+.application.dialog.expedition-tracker-ui .window-header i,
+.application.dialog.expedition-tracker-ui .window-header [class^='fa-'],
+.application.dialog.expedition-tracker-ui .window-header [class*=' fa-'],
+.application.dialog.expedition-tracker-ui .window-header .fas,
+.application.dialog.expedition-tracker-ui .window-header .far,
+.application.dialog.expedition-tracker-ui .window-header .fal,
+.application.dialog.expedition-tracker-ui .window-header .fab,
+.application.expedition-timed-effect-template-config .window-header i,
+.application.expedition-timed-effect-template-config .window-header [class^='fa-'],
+.application.expedition-timed-effect-template-config .window-header [class*=' fa-'],
+.application.expedition-timed-effect-template-config .window-header .fas,
+.application.expedition-timed-effect-template-config .window-header .far,
+.application.expedition-timed-effect-template-config .window-header .fal,
+.application.expedition-timed-effect-template-config .window-header .fab,
+#expedition-tracker-timed-effect-templates-config .window-header i,
+#expedition-tracker-timed-effect-templates-config .window-header [class^='fa-'],
+#expedition-tracker-timed-effect-templates-config .window-header [class*=' fa-'],
+#expedition-tracker-timed-effect-templates-config .window-header .fas,
+#expedition-tracker-timed-effect-templates-config .window-header .far,
+#expedition-tracker-timed-effect-templates-config .window-header .fal,
+#expedition-tracker-timed-effect-templates-config .window-header .fab {
+  font-family: var(--font-awesome) !important;
+}
+
+#expedition-tracker-overlay.expedition-tracker-overlay,
+.application.dialog.expedition-tracker-ui,
+.application.expedition-timed-effect-template-config,
+#expedition-tracker-timed-effect-templates-config {
+  --et-surface: rgba(10, 12, 18, 0.8);
+  --et-surface-elevated: rgba(10, 12, 18, 0.95);
+  --et-surface-dialog: rgba(12, 10, 18, 0.96);
+  --et-surface-muted: rgba(255, 248, 220, 0.04);
+  --et-surface-hover: rgba(38, 43, 56, 0.98);
+  --et-surface-input: rgba(58, 49, 61, 0.96);
+  --et-text: rgba(245, 240, 230, 0.94);
+  --et-text-strong: rgba(245, 240, 230, 0.98);
+  --et-text-muted: rgba(245, 240, 230, 0.84);
+  --et-text-subtle: rgba(245, 240, 230, 0.72);
+  --et-text-faint: rgba(245, 240, 230, 0.62);
+  --et-input-text: rgba(245, 230, 200, 0.95);
+  --et-border: rgba(201, 199, 184, 0.45);
+  --et-border-strong: rgba(201, 199, 184, 0.65);
+  --et-border-soft: rgba(201, 199, 184, 0.24);
+  --et-border-faint: rgba(201, 199, 184, 0.18);
+  --et-border-subtle: rgba(201, 199, 184, 0.12);
+  --et-panel-border: rgba(201, 199, 184, 0.55);
+  --et-summary-border: rgba(201, 199, 184, 0.22);
+  --et-tooltip-border: rgba(201, 199, 184, 0.42);
+  --et-shadow: 0 0.55rem 1.4rem rgba(0, 0, 0, 0.32);
+  --et-accent: rgba(112, 82, 42, 0.96);
+  --et-accent-gradient-start: rgba(112, 82, 42, 0.92);
+  --et-accent-gradient-end: rgba(66, 48, 24, 0.96);
+  --et-accent-text: rgba(245, 240, 230, 0.96);
+  --et-accent-highlight: rgba(233, 199, 112, 0.95);
+  --et-light-source-highlight: rgba(214, 171, 92, 0.18);
+  --et-header-text: rgba(245, 240, 230, 0.96);
+}
+
+body.theme-light #expedition-tracker-overlay.expedition-tracker-overlay,
+body.theme-light .application.dialog.expedition-tracker-ui,
+body.theme-light .application.expedition-timed-effect-template-config,
+body.theme-light #expedition-tracker-timed-effect-templates-config,
+.theme-light #expedition-tracker-overlay.expedition-tracker-overlay,
+.theme-light .application.dialog.expedition-tracker-ui,
+.theme-light .application.expedition-timed-effect-template-config,
+.theme-light #expedition-tracker-timed-effect-templates-config {
+  --et-surface: rgba(244, 238, 226, 0.92);
+  --et-surface-elevated: rgba(250, 246, 238, 0.98);
+  --et-surface-dialog: rgba(246, 242, 233, 0.98);
+  --et-surface-muted: rgba(92, 64, 28, 0.06);
+  --et-surface-hover: rgba(228, 218, 201, 0.98);
+  --et-surface-input: rgba(255, 252, 246, 0.98);
+  --et-text: rgba(49, 39, 24, 0.96);
+  --et-text-strong: rgba(35, 27, 16, 0.98);
+  --et-text-muted: rgba(67, 55, 38, 0.88);
+  --et-text-subtle: rgba(86, 72, 53, 0.76);
+  --et-text-faint: rgba(108, 95, 76, 0.68);
+  --et-input-text: rgba(43, 34, 22, 0.96);
+  --et-border: rgba(103, 83, 54, 0.42);
+  --et-border-strong: rgba(103, 83, 54, 0.58);
+  --et-border-soft: rgba(103, 83, 54, 0.24);
+  --et-border-faint: rgba(103, 83, 54, 0.18);
+  --et-border-subtle: rgba(103, 83, 54, 0.12);
+  --et-panel-border: rgba(103, 83, 54, 0.38);
+  --et-summary-border: rgba(103, 83, 54, 0.2);
+  --et-tooltip-border: rgba(103, 83, 54, 0.32);
+  --et-shadow: 0 0.55rem 1.4rem rgba(59, 43, 17, 0.18);
+  --et-accent: rgba(140, 98, 39, 0.92);
+  --et-accent-gradient-start: rgba(191, 149, 88, 0.95);
+  --et-accent-gradient-end: rgba(154, 112, 51, 0.94);
+  --et-accent-text: rgba(255, 250, 242, 0.98);
+  --et-accent-highlight: rgba(149, 98, 33, 0.96);
+  --et-light-source-highlight: rgba(140, 98, 39, 0.16);
+  --et-header-text: rgba(255, 250, 242, 0.98);
 }
 
 .expedition-tracker-hud {
@@ -17,10 +117,10 @@
   flex-direction: column;
   gap: 0.55rem;
   padding: 0.2rem 0.24rem;
-  border: 1px solid rgba(201, 199, 184, 0.24);
+  border: 1px solid var(--et-border-soft);
   border-radius: 8px;
-  background: rgba(10, 12, 18, 0.8);
-  color: rgba(245, 240, 230, 0.94);
+  background: var(--et-surface);
+  color: var(--et-text);
 }
 
 .expedition-timed-effects-track {
@@ -49,9 +149,9 @@
   justify-content: center;
   gap: 0.15rem;
   padding: 0.2rem;
-  border: 1px solid rgba(201, 199, 184, 0.18);
+  border: 1px solid var(--et-border-faint);
   border-radius: 6px;
-  background: rgba(255, 248, 220, 0.04);
+  background: var(--et-surface-muted);
   overflow: hidden;
 }
 
@@ -63,13 +163,13 @@
   width: 1.7rem;
   height: 1.7rem;
   padding: 0;
-  border: 1px solid rgba(201, 199, 184, 0.4);
+  border: 1px solid var(--et-border);
   border-radius: 5px;
-  background: rgba(10, 12, 18, 0.95);
+  background: var(--et-surface-elevated);
 }
 
 .expedition-timed-effect-icon:hover {
-  background: rgba(38, 43, 56, 0.98);
+  background: var(--et-surface-hover);
 }
 
 .expedition-timed-effect-icon img {
@@ -87,8 +187,8 @@
   height: 100%;
   padding: 0.1rem;
   border-radius: 4px;
-  background: linear-gradient(180deg, rgba(112, 82, 42, 0.92), rgba(66, 48, 24, 0.96));
-  color: rgba(245, 240, 230, 0.96);
+  background: linear-gradient(180deg, var(--et-accent-gradient-start), var(--et-accent-gradient-end));
+  color: var(--et-accent-text);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -97,7 +197,7 @@
 
 .expedition-timed-effect-icon-paused {
   opacity: 0.78;
-  border-color: rgba(212, 175, 55, 0.78);
+  border-color: var(--et-accent-highlight);
 }
 
 .expedition-timed-effect-icon-paused::after {
@@ -107,22 +207,22 @@
   left: -0.15rem;
   padding: 0.02rem 0.14rem;
   border-radius: 999px;
-  background: rgba(112, 82, 42, 0.96);
-  color: rgba(245, 240, 230, 0.95);
+  background: var(--et-accent);
+  color: var(--et-accent-text);
   font-size: 0.55rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .expedition-timed-effect-icon-light-source {
-  box-shadow: 0 0 0 1px rgba(214, 171, 92, 0.18);
+  box-shadow: 0 0 0 1px var(--et-light-source-highlight);
 }
 
 .expedition-timed-effect-badge,
 .expedition-timed-effect-slot-overflow {
   font-size: 0.68rem;
   line-height: 1;
-  color: rgba(245, 240, 230, 0.92);
+  color: var(--et-accent-text);
 }
 
 .expedition-timed-effect-badge {
@@ -131,7 +231,7 @@
   bottom: -0.2rem;
   padding: 0.08rem 0.18rem;
   border-radius: 999px;
-  background: rgba(112, 82, 42, 0.96);
+  background: var(--et-accent);
 }
 
 .expedition-timed-effect-slot-overflow {
@@ -140,7 +240,7 @@
 
 .expedition-tracker-hud .referee-pane-title {
   font-weight: 700;
-  color: rgba(245, 240, 230, 0.96);
+  color: var(--et-text-strong);
   line-height: 1.1;
 }
 
@@ -188,7 +288,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
   font-size: 0.9rem;
-  color: rgba(245, 240, 230, 0.8);
+  color: var(--et-text-muted);
 }
 
 .referee-turn-actions {
@@ -200,16 +300,16 @@
 .referee-hud-button {
   width: auto;
   padding: 0.35rem 0.5rem;
-  border: 1px solid rgba(201, 199, 184, 0.45);
+  border: 1px solid var(--et-border);
   border-radius: 6px;
-  background: rgba(10, 12, 18, 0.95);
-  color: rgba(245, 240, 230, 0.94);
+  background: var(--et-surface-elevated);
+  color: var(--et-text);
   white-space: nowrap;
 }
 
 .referee-hud-button:hover:not(:disabled),
 .referee-log-toggle:hover {
-  background: rgba(38, 43, 56, 0.98);
+  background: var(--et-surface-hover);
 }
 
 .referee-hud-button:disabled {
@@ -259,10 +359,10 @@
   flex: 0 0 auto;
   min-width: 1.9rem;
   padding: 0.05rem 0.35rem;
-  border: 1px solid rgba(201, 199, 184, 0.45);
+  border: 1px solid var(--et-border);
   border-radius: 6px;
-  background: rgba(10, 12, 18, 0.95);
-  color: rgba(245, 240, 230, 0.94);
+  background: var(--et-surface-elevated);
+  color: var(--et-text);
   line-height: 1;
 }
 
@@ -271,7 +371,7 @@
   flex-direction: column;
   gap: 0.35rem;
   padding-top: 0.1rem;
-  border-top: 1px solid rgba(201, 199, 184, 0.18);
+  border-top: 1px solid var(--et-border-faint);
 }
 
 .referee-log-list {
@@ -285,8 +385,8 @@
 
 .referee-log-entry {
   padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(201, 199, 184, 0.12);
-  color: rgba(245, 240, 230, 0.84);
+  border-bottom: 1px solid var(--et-border-subtle);
+  color: var(--et-text-muted);
 }
 
 .referee-log-entry:last-child {
@@ -295,7 +395,7 @@
 }
 
 .referee-log-entry-empty {
-  color: rgba(245, 240, 230, 0.62);
+  color: var(--et-text-faint);
 }
 
 .expedition-timed-effect-tooltip {
@@ -304,23 +404,23 @@
   min-width: 12rem;
   max-width: 18rem;
   padding: 0.55rem 0.65rem;
-  border: 1px solid rgba(201, 199, 184, 0.42);
+  border: 1px solid var(--et-tooltip-border);
   border-radius: 8px;
-  background: rgba(12, 10, 18, 0.98);
-  color: rgba(245, 240, 230, 0.94);
-  box-shadow: 0 0.55rem 1.4rem rgba(0, 0, 0, 0.32);
+  background: var(--et-surface-dialog);
+  color: var(--et-text);
+  box-shadow: var(--et-shadow);
   pointer-events: none;
 }
 
 .expedition-timed-effect-tooltip-title {
   font-weight: 700;
-  color: rgba(245, 240, 230, 0.98);
+  color: var(--et-text-strong);
   margin-bottom: 0.2rem;
 }
 
 .expedition-timed-effect-tooltip-row {
   font-size: 0.82rem;
-  color: rgba(245, 240, 230, 0.84);
+  color: var(--et-text-muted);
 }
 
 .expedition-timed-effect-tooltip-row + .expedition-timed-effect-tooltip-row {
@@ -328,14 +428,30 @@
 }
 
 .expedition-timed-effect-tooltip-row-status {
-  color: rgba(233, 199, 112, 0.95);
+  color: var(--et-accent-highlight);
   font-weight: 700;
 }
 
 .application.dialog.expedition-tracker-ui .window-content,
 .application.dialog.expedition-tracker-ui {
-  background: rgba(12, 10, 18, 0.96);
-  color: rgba(245, 240, 230, 0.92);
+  background: var(--et-surface-dialog);
+  color: var(--et-text);
+}
+
+.application.dialog.expedition-tracker-ui .window-header,
+.application.dialog.expedition-tracker-ui .window-header button {
+  color: var(--et-header-text);
+}
+
+.application.dialog.expedition-tracker-ui .window-header button,
+.application.dialog.expedition-tracker-ui .window-header button i,
+.application.dialog.expedition-tracker-ui .window-header button [class^='fa-'],
+.application.dialog.expedition-tracker-ui .window-header button [class*=' fa-'],
+.application.dialog.expedition-tracker-ui .window-header .header-control,
+.application.dialog.expedition-tracker-ui .window-header .header-control i {
+  color: var(--et-header-text) !important;
+  -webkit-text-fill-color: var(--et-header-text);
+  text-shadow: none;
 }
 
 .expedition-tracker-dialog-form {
@@ -347,9 +463,10 @@
 }
 
 .expedition-tracker-dialog-form .form-group > label,
+.expedition-tracker-dialog-form .form-fields > label,
 .expedition-tracker-dialog-form fieldset > label,
 .expedition-tracker-dialog-form legend {
-  color: rgba(245, 240, 230, 0.92);
+  color: var(--et-text);
   font-weight: 700;
 }
 
@@ -357,9 +474,9 @@
 .expedition-tracker-dialog-form select,
 .application.dialog.expedition-tracker-ui textarea {
   min-height: 2.2rem;
-  background: rgba(58, 49, 61, 0.96);
-  border: 1px solid rgba(201, 199, 184, 0.65);
-  color: rgba(245, 230, 200, 0.95);
+  background: var(--et-surface-input);
+  border: 1px solid var(--et-border-strong);
+  color: var(--et-input-text);
 }
 
 .expedition-tracker-dialog-form input[type='checkbox'] {
@@ -368,15 +485,21 @@
   margin-right: 0.45rem;
 }
 
+.application.dialog.expedition-tracker-ui .window-content button,
+.application.dialog.expedition-tracker-ui .dialog-buttons button,
+.application.dialog.expedition-tracker-ui .sheet-footer button {
+  color: var(--et-text);
+}
+
 .expedition-tracker-dialog-form .hint {
   margin-top: 0.35rem;
-  color: rgba(245, 240, 230, 0.72);
+  color: var(--et-text-subtle);
 }
 
 .expedition-tracker-dialog-form fieldset {
   margin: 0;
   padding: 0.85rem 1rem 1rem;
-  border: 1px solid rgba(201, 199, 184, 0.55);
+  border: 1px solid var(--et-panel-border);
   border-radius: 0.75rem;
 }
 
@@ -410,7 +533,7 @@
 
 .expedition-tracker-dialog-form fieldset > .form-fields:first-of-type > .form-fields span {
   font-weight: 700;
-  color: rgba(245, 240, 230, 0.92);
+  color: var(--et-text);
   text-align: center;
 }
 
@@ -461,13 +584,13 @@
   gap: 0.25rem;
   margin-top: 0.75rem;
   padding: 0.75rem 0.85rem;
-  border: 1px solid rgba(201, 199, 184, 0.22);
+  border: 1px solid var(--et-summary-border);
   border-radius: 0.65rem;
-  background: rgba(255, 248, 220, 0.04);
+  background: var(--et-surface-muted);
 }
 
 .expedition-tracker-dialog-form .expedition-timekeeping-summary-line {
-  color: rgba(245, 240, 230, 0.84);
+  color: var(--et-text-muted);
 }
 
 .expedition-tracker-dialog-form .expedition-timekeeping-custom-fields {
@@ -497,12 +620,23 @@
   border-collapse: collapse;
 }
 
-.application.expedition-timed-effect-template-config .window-content {
-  color: inherit;
+.application.expedition-timed-effect-template-config,
+.application.expedition-timed-effect-template-config .window-content,
+#expedition-tracker-timed-effect-templates-config,
+#expedition-tracker-timed-effect-templates-config .window-content {
+  background: var(--et-surface-dialog);
+  color: var(--et-text);
+}
+
+.application.expedition-timed-effect-template-config .window-header,
+#expedition-tracker-timed-effect-templates-config .window-header {
+  color: var(--et-text);
 }
 
 .expedition-timed-effect-templates-form {
   padding: 0.5rem;
+  background: transparent;
+  color: var(--et-text);
 }
 
 .expedition-timed-effect-templates-form .hint,
@@ -511,21 +645,91 @@
   color: inherit;
 }
 
+.expedition-timed-effect-template-table {
+  background: transparent;
+}
+
 .expedition-timed-effect-template-table th,
 .expedition-timed-effect-template-table td {
   padding: 0.35rem;
   vertical-align: middle;
-  border-bottom: 1px solid var(--color-border-light-tertiary, rgba(0, 0, 0, 0.15));
+  border-bottom: 1px solid var(--et-border-soft);
 }
 
 .expedition-timed-effect-template-table th {
   text-align: left;
+  color: var(--et-text-strong);
+  background: var(--et-surface-muted);
+}
+
+body.theme-light #expedition-tracker-timed-effect-templates-config .expedition-timed-effect-template-table th,
+.theme-light #expedition-tracker-timed-effect-templates-config .expedition-timed-effect-template-table th,
+body.theme-light .application.expedition-timed-effect-template-config .expedition-timed-effect-template-table th,
+.theme-light .application.expedition-timed-effect-template-config .expedition-timed-effect-template-table th {
+  background: rgba(214, 204, 186, 0.72);
 }
 
 .expedition-timed-effect-template-table input,
 .expedition-timed-effect-template-table button,
 .expedition-timed-effect-templates-form .sheet-footer button {
   width: 100%;
+}
+
+#expedition-tracker-timed-effect-templates-config input:not([type='checkbox']),
+#expedition-tracker-timed-effect-templates-config select,
+#expedition-tracker-timed-effect-templates-config textarea,
+.application.expedition-timed-effect-template-config input:not([type='checkbox']),
+.application.expedition-timed-effect-template-config select,
+.application.expedition-timed-effect-template-config textarea {
+  background: var(--et-surface-input);
+  border: 1px solid var(--et-border-strong);
+  color: var(--et-input-text) !important;
+  -webkit-text-fill-color: var(--et-input-text);
+}
+
+#expedition-tracker-timed-effect-templates-config input:not([type='checkbox']):disabled,
+#expedition-tracker-timed-effect-templates-config select:disabled,
+#expedition-tracker-timed-effect-templates-config textarea:disabled,
+.application.expedition-timed-effect-template-config input:not([type='checkbox']):disabled,
+.application.expedition-timed-effect-template-config select:disabled,
+.application.expedition-timed-effect-template-config textarea:disabled {
+  color: var(--et-text-muted) !important;
+  -webkit-text-fill-color: var(--et-text-muted);
+  opacity: 1;
+}
+
+#expedition-tracker-timed-effect-templates-config button,
+.application.expedition-timed-effect-template-config button {
+  background: var(--et-surface-elevated);
+  border: 1px solid var(--et-border);
+  color: var(--et-text) !important;
+  -webkit-text-fill-color: var(--et-text);
+  text-shadow: none;
+}
+
+#expedition-tracker-timed-effect-templates-config button:hover:not(:disabled),
+.application.expedition-timed-effect-template-config button:hover:not(:disabled) {
+  background: var(--et-surface-hover);
+}
+
+.expedition-timed-effect-template-table label,
+.expedition-timed-effect-template-table span,
+#expedition-tracker-timed-effect-templates-config .template-actions-cell,
+#expedition-tracker-timed-effect-templates-config .sheet-footer,
+#expedition-tracker-timed-effect-templates-config .sheet-footer button,
+#expedition-tracker-timed-effect-templates-config .expedition-timed-effect-template-actions button {
+  color: var(--et-text) !important;
+}
+
+.application.expedition-timed-effect-template-config input::placeholder,
+.application.expedition-timed-effect-template-config textarea::placeholder,
+#expedition-tracker-timed-effect-templates-config input::placeholder,
+#expedition-tracker-timed-effect-templates-config textarea::placeholder {
+  color: var(--et-text-faint);
+}
+
+.application.expedition-timed-effect-template-config .hint {
+  color: var(--et-text-subtle);
 }
 
 .expedition-timed-effect-icon-path-field {
@@ -542,6 +746,25 @@
 
 .expedition-timed-effect-custom-fields[hidden] {
   display: none;
+}
+
+.expedition-timed-effect-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.expedition-timed-effect-checkbox-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  color: var(--et-text);
+}
+
+.expedition-timed-effect-checkbox-option input[type='checkbox'] {
+  margin-right: 0;
 }
 
 .expedition-timed-effect-manage-form input[readonly] {
